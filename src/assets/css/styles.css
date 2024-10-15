@@ -306,12 +306,13 @@ Header Style
 .header-area {
   position: relative;
   background-color: #fff;
-  height: 100px;
+  height: 120px;
   z-index: 100;
   -webkit-transition: all .5s ease 0s;
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
   transition: all .5s ease 0s;
+  
 }
 
 .header-area .main-nav {
@@ -334,7 +335,6 @@ Header Style
 .header-area .main-nav ul.nav {
   flex-basis: 100%;
   margin-top: 30px;
-  
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -416,13 +416,27 @@ Header Style
 .visible{
   display:inline !important;
 }
-
-@media only screen and (min-width: 1000px) and (max-width: 1400px) {
-  .header-area .main-nav .nav li {
-    padding: 1px;
-    
+@media only screen and (min-width: 430px) and (max-width: 700px) {
+  .header-area .main-nav .nav li a {
+    height: auto;
+    margin-left: 0rem;
+    padding-left: 2px;
+    padding-right: 2px;
+    width: 30px;
+    font-size: 7px;
   }
+  .header-area .main-nav .logo {
+    width: 60px;
+    height: auto;
+  }
+}
 
+@media only screen and (min-width: 900px) and (max-width: 1400px) {
+  .header-area .main-nav .nav li a {
+    margin-left: 3rem;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 @media only screen and (min-width: 700) and (max-width: 797px) {
@@ -495,9 +509,6 @@ Header Style
   }
   .header-area .logo {
     margin-left: 0px;
-  }
-  .header-area .main-nav {
-   
   }
   .header-area .main-nav .nav {
     float: none;
@@ -1751,16 +1762,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media only screen and  (min-width: 700px) and (max-width: 991px){
-  .header-area .main-nav .logo h1 {
-    line-height: 100px;
-  }
-  .background-header .main-nav .logo h1 {
-    line-height: 80px;
-  }
   .header-area .main-nav .nav li a {
-    padding: 0.0px;
-    margin: -5px;
+      margin-left: 2rem;
+      padding-left: 3px;
+      padding-right: 3px;
+      height: auto;
   }
+
   .header-area .main-nav .nav li:last-child a {
     padding-right: 15px;
   }
