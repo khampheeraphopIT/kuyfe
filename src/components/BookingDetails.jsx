@@ -17,7 +17,11 @@ function BookingDetails() {
   const [isLoaded, setIsLoaded] = useState(true);
   const [booking, setBooking] = useState({});
   const [timeLeft, setTimeLeft] = useState({});
+  const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
 
+  const handleToggle = () => {
+    setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+  };
   const handleSidebarToggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
   }
@@ -138,6 +142,33 @@ function BookingDetails() {
                       </li>
                     )}
                   </ul>
+                  <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                  <div className="bar1"></div>
+                  <div className="bar2"></div>
+                  <div className="bar3"></div>
+                </div>
+                <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                  <ul className="navMenu">
+                    <li><Link to="/Profile" className="active">Home</Link></li>
+                    <li><Link to="/SearchRoom">Search Room</Link></li>
+                    <li><Link to="/Contact">Contact Us</Link></li>
+                    <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                    {isLoggedIn && user ? (
+                    <li>
+                      <Avatar
+                        src={user?.image ? `data:image/jpeg;base64,${user.image}` : 'default-image-url'}
+                        alt={user?.id}
+                        onClick={handleSidebarToggle}
+                      />
+                    </li>
+                  ) : (
+                    <li>
+                      <button onClick={handleSidebarToggle}>
+                      </button>
+                    </li>
+                  )}
+                  </ul>
+                </div>
                 </nav>
               </div>
             </div>
@@ -169,9 +200,9 @@ function BookingDetails() {
                 <th>roomType</th>
                 <th>Check-In </th>
                 <th>Check-Out </th>
-                <th>Cost</th>
-                <th>adultsCount</th>
-                <th>childrenCount</th>
+                <th>Total</th>
+                <th>adults</th>
+                <th>childrens</th>
                 <th>duration</th>
                 <th>extraBed</th>
                 <th>bookingStatus</th>

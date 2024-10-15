@@ -30,7 +30,11 @@ const SearchRoom = () => {
   const [isLoaded, setIsLoaded] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') !== null);
+  const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
 
+  const handleToggle = () => {
+    setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+  };
   const rooms = [
     { id: 1, type: 'single room', image: properties_01, name: 'DELUXE VILLA', price: '3,500', area: '15x15' },
     { id: 2, type: 'single room', image: properties_02, name: 'PREMIER DULUXE VILLA', price: '4,000', area: '15x17' },
@@ -134,45 +138,69 @@ const SearchRoom = () => {
       </div>
 
       <header className="header-area header-sticky">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <nav className="main-nav">
-                <Link to="/" className="logo">
-                  <img src={Logo} alt="" />
-                </Link>
-
-                <ul className="nav">
-                  <li><Link to="/Profile" className="active">Home</Link></li>
-                  <li><Link to="/SearchRoom">Search Room</Link></li>
-                  <li><Link to="/Contact">Contact Us</Link></li>
-                  <li><Link to="/SearchRoom"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
-                  {isLoggedIn ? (
-                    <li>
-                      <Avatar
-                        src={user.image ? `data:image/jpeg;base64,${user.image}` : 'default-image-url'}
-                        alt={user.id}
-                        onClick={handleSidebarToggle}
-                      />
-                    </li>
-                  ) : (
-                    <li>
-                      <button onClick={handleSidebarToggle}>Login</button>
-                    </li>
-                  )}
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <Sidebar
-        isOpen={isSidebarOpen}
-        onClose={handleSidebarToggle}
-        isLoggedIn={isLoggedIn}
-        handleLogout={handleLogout}
-      />
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <nav className="main-nav">
+                                <Link to="/" className="logo">
+                                    <img src={Logo} alt="" />
+                                </Link>
+                                <ul className="nav">
+                                    <li><Link to="/Profile" className="active">Home</Link></li>
+                                    <li><Link to="/SearchRoom">Search Room</Link></li>
+                                    <li><Link to="/Contact">Contact Us</Link></li>
+                                    <li><Link to="/SearchRoom"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                                    {isLoggedIn ? (
+                                        <li>
+                                            <Avatar
+                                                src={user.image ? `data:image/jpeg;base64,${user.image}` : 'default-image-url'}
+                                                alt={user.id}
+                                                onClick={handleSidebarToggle}
+                                            />
+                                        </li>
+                                    ) : (
+                                        <li>
+                                            <button onClick={handleSidebarToggle}>Login</button>
+                                        </li>
+                                    )}
+                                </ul>
+                                <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                                    <div className="bar1"></div>
+                                    <div className="bar2"></div>
+                                    <div className="bar3"></div>
+                                </div>
+                                <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                                    <ul className="navMenu">
+                                        <li><Link to="/Profile" className="active">Home</Link></li>
+                                        <li><Link to="/SearchRoom">Search Room</Link></li>
+                                        <li><Link to="/Contact">Contact Us</Link></li>
+                                        <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                                        {isLoggedIn ? (
+                                            <li>
+                                                <Avatar
+                                                    src={user.image ? `data:image/jpeg;base64,${user.image}` : 'default-image-url'}
+                                                    alt={user.id}
+                                                    onClick={handleSidebarToggle}
+                                                />
+                                            </li>
+                                        ) : (
+                                            <li>
+                                                <button onClick={handleSidebarToggle}>Login</button>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <Sidebar
+                isOpen={isSidebarOpen}
+                onClose={handleSidebarToggle}
+                isLoggedIn={isLoggedIn}
+                handleLogout={handleLogout}
+            />
 
       <div className="page-heading header-text">
         <div className="container">
@@ -212,21 +240,21 @@ const SearchRoom = () => {
               .map(room => (
                 <div key={room.id} className={`col-lg-4 col-md-6 align-self-center mb-30 properties-items ${room.type}`}>
                   <div className="item">
-                    <Link to={`/RoomDetails1/${room.id}`} onClick={() => handleRoomDetails(room.id)}>
+                    <Link to={`/RoomDetails/${room.id}`} onClick={() => handleRoomDetails(room.id)}>
                       <img src={room.image} alt={room.name} />
                     </Link>
                     <span className="category">
                       {room.type === 'single room' ? <HotelIcon style={{ fontSize: 30 }}></HotelIcon> : <BedIcon style={{ fontSize: 30 }}></BedIcon>}
                     </span>
                     <h6>THB {room.price}</h6>
-                    <h4><Link to={`/RoomDetails1/${room.id}`} onClick={() => handleRoomDetails(room.id)}>{room.name}</Link></h4>
+                    <h4><Link to={`/RoomDetails/${room.id}`} onClick={() => handleRoomDetails(room.id)}>{room.name}</Link></h4>
                     <ul>
                       <li>Number of rooms: <span>{room.NumberOfRooms}</span></li>
                       <li>Area: <span>{room.area}</span></li>
                       <li>Stay 2 Nights Extra Save 5%</li>
                     </ul>
                     <div className="main-button">
-                      <Link to={`/RoomDetails1/${room.id}`} onClick={() => handleRoomDetails(room.id)}>Room Details</Link>
+                      <Link to={`/RoomDetails/${room.id}`} onClick={() => handleRoomDetails(room.id)}>Room Details</Link>
                     </div>
                   </div>
                 </div>

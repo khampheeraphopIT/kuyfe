@@ -33,6 +33,11 @@ const Profile = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') !== null);
 
+  const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
+
+  const handleToggle = () => {
+    setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+  };
   useEffect(() => {
     const slides = document.querySelectorAll('.main-banner .item')
     const interval = setInterval(() => {
@@ -66,7 +71,7 @@ const Profile = () => {
     const token = localStorage.getItem('token')
     if (!token) {
       navigate('/login');
-      return ;
+      return;
     }
 
     const myHeaders = new Headers();
@@ -147,6 +152,32 @@ const Profile = () => {
                     </li>
                   )}
                 </ul>
+                <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                  <div className="bar1"></div>
+                  <div className="bar2"></div>
+                  <div className="bar3"></div>
+                </div>
+                <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                  <ul className="navMenu">
+                    <li><Link to="/Profile" className="active">Home</Link></li>
+                    <li><Link to="/SearchRoom">Search Room</Link></li>
+                    <li><Link to="/Contact">Contact Us</Link></li>
+                    <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                    {isLoggedIn ? (
+                      <li>
+                        <Avatar
+                          src={user.image ? `data:image/jpeg;base64,${user.image}` : 'default-image-url'}
+                          alt={user.id}
+                          onClick={handleSidebarToggle}
+                        />
+                      </li>
+                    ) : (
+                      <li>
+                        <button onClick={handleSidebarToggle}>Login</button>
+                      </li>
+                    )}
+                  </ul>
+                </div>
               </nav>
             </div>
           </div>
@@ -198,13 +229,13 @@ const Profile = () => {
                         <button
                           className={selectedRoom === 'SingleRoom' ? 'nav-link active' : 'nav-link'} id="SingleRoom-tab" data-bs-toggle="tab" data-bs-target="#SingleRoom"
                           type="button"
-                          onClick={() => setSelectedRoom('SingleRoom')}> <HotelIcon style={{ fontSize: 50}}></HotelIcon> </button>
+                          onClick={() => setSelectedRoom('SingleRoom')}> <HotelIcon style={{ fontSize: 50 }}></HotelIcon> </button>
                       </li>
                       <li className="nav-item" role="presentation">
                         <button
                           className={selectedRoom === 'DoubleRoom' ? 'nav-link active' : 'nav-link'}
                           type="button"
-                          onClick={() => setSelectedRoom('DoubleRoom')}><BedIcon style={{ fontSize: 50}}></BedIcon></button>
+                          onClick={() => setSelectedRoom('DoubleRoom')}><BedIcon style={{ fontSize: 50 }}></BedIcon></button>
                       </li>
                     </ul>
                   </div>
@@ -285,7 +316,7 @@ const Profile = () => {
                 <Link to={`/RoomDetails/1`}>
                   <img src={properties_01} alt="DELUXE VILLA" />
                 </Link>
-                <span className="category"><HotelIcon style={{ fontSize: 30}}></HotelIcon></span>
+                <span className="category"><HotelIcon style={{ fontSize: 30 }}></HotelIcon></span>
                 <h6>THB 3,500</h6>
                 <h4>DELUXE VILLA</h4>
                 <ul>
@@ -303,7 +334,7 @@ const Profile = () => {
                 <Link to={`/RoomDetails/2`}>
                   <img src={properties_02} alt="DELUXE VILLA" />
                 </Link>
-                <span className="category"><HotelIcon style={{ fontSize: 30}}></HotelIcon></span>
+                <span className="category"><HotelIcon style={{ fontSize: 30 }}></HotelIcon></span>
                 <h6>THB 4,000</h6>
                 <h4>PREMIER DELUXE VILLA</h4>
                 <ul>
@@ -321,7 +352,7 @@ const Profile = () => {
                 <Link to={`/RoomDetails/3`}>
                   <img src={properties_03} alt="DELUXE VILLA" />
                 </Link>
-                <span className="category"><HotelIcon style={{ fontSize: 30}}></HotelIcon></span>
+                <span className="category"><HotelIcon style={{ fontSize: 30 }}></HotelIcon></span>
                 <h6>THB 5,000</h6>
                 <h4>POOL VILLA</h4>
                 <ul>
@@ -339,7 +370,7 @@ const Profile = () => {
                 <Link to={`/RoomDetails/4`}>
                   <img src={properties_04} alt="DELUXE VILLA" />
                 </Link>
-                <span className="category"><BedIcon style={{ fontSize: 30}}></BedIcon></span>
+                <span className="category"><BedIcon style={{ fontSize: 30 }}></BedIcon></span>
                 <h6>THB 6,000</h6>
                 <h4>DELUXE VILLA</h4>
                 <ul>
@@ -357,7 +388,7 @@ const Profile = () => {
                 <Link to={`/RoomDetails/5`}>
                   <img src={properties_05} alt="DELUXE VILLA" />
                 </Link>
-                <span className="category"><BedIcon style={{ fontSize: 30}}></BedIcon></span>
+                <span className="category"><BedIcon style={{ fontSize: 30 }}></BedIcon></span>
                 <h6>THB 6,500</h6>
                 <h4>PREMIER DELUXE VILLA</h4>
                 <ul>
@@ -375,7 +406,7 @@ const Profile = () => {
                 <Link to={`/RoomDetails/6`}>
                   <img src={properties_06} alt="DELUXE VILLA" />
                 </Link>
-                <span className="category"><BedIcon style={{ fontSize: 30}}></BedIcon></span>
+                <span className="category"><BedIcon style={{ fontSize: 30 }}></BedIcon></span>
                 <h6>THB 7,500</h6>
                 <h4>POOL VILLA</h4>
                 <ul>

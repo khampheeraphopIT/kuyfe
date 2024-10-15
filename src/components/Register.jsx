@@ -8,7 +8,11 @@ import Logo from '../assets/images/logo.jpg';
 function Register() {
     const navigate = useNavigate();
     const MySwal = withReactContent(Swal);
+    const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
 
+    const handleToggle = () => {
+        setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+    };
     const [inputs, setInputs] = useState({
         fname: '',
         lname: '',
@@ -47,7 +51,7 @@ function Register() {
         }
     }
 
-    async function checkPhoneNumberExists (phoneNumber) {
+    async function checkPhoneNumberExists(phoneNumber) {
         try {
             const response = await fetch('http://localhost:3333/checkphoneNumber', {
                 method: 'POST',
@@ -224,25 +228,19 @@ function Register() {
                 </div>
             </div>
 
-            <header className="header-area header-sticky">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <nav className="main-nav">
-                                <a href="/" className="logo">
-                                    <img src={Logo} alt="" />
-                                </a>
-                                <ul className="nav">
-                                    <li><Link to="/" className="active">Home</Link></li>
-                                    <li><Link to="/SearchRoom1">Search Room</Link></li>
-                                    <li><Link to="/Contact">Contact Us</Link></li>
-                                    <li><Link to="/RoomDetails"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                <div className="bar1"></div>
+                <div className="bar2"></div>
+                <div className="bar3"></div>
+            </div>
+            <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                <ul className="navMenu">
+                    <li><Link to="/" className="active">Home</Link></li>
+                    <li><Link to="/SearchRoom1">Search Room</Link></li>
+                    <li><Link to="/Contact1">Contact Us</Link></li>
+                    <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                </ul>
+            </div>
 
             <div className="form-container">
                 <form onSubmit={handleSubmit} className="register-form">

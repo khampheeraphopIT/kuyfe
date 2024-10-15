@@ -27,7 +27,11 @@ const RoomDetails1 = () => {
     const [room, setRoom] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') !== null);
+    const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
 
+    const handleToggle = () => {
+        setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+    };
     const navigate = useNavigate();
 
     const handleSidebarToggle = () => {
@@ -62,7 +66,7 @@ const RoomDetails1 = () => {
     const handleBookNow = () => {
         // Remove the React Element (type) from the room object before navigating
         const { type, ...roomWithoutIcons } = room;
-    
+
         navigate('/booking', { state: { room: roomWithoutIcons } });
     }
 
@@ -107,6 +111,20 @@ const RoomDetails1 = () => {
                                     <li><Link to="/SearchRoom"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
                                     <li><Link to='/login'><Avatar alt="Profile" /></Link></li>
                                 </ul>
+                                <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                                    <div className="bar1"></div>
+                                    <div className="bar2"></div>
+                                    <div className="bar3"></div>
+                                </div>
+                                <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                                    <ul className="navMenu">
+                                        <li><Link to="/" className="active">Home</Link></li>
+                                        <li><Link to="/SearchRoom1">Search Room</Link></li>
+                                        <li><Link to="/Contact1">Contact Us</Link></li>
+                                        <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                                        <li><Link to='/login'><Avatar alt="Profile" /></Link></li>
+                                    </ul>
+                                </div>
                             </nav>
                         </div>
                     </div>
@@ -157,7 +175,7 @@ const RoomDetails1 = () => {
                                                     <p>Perfect for solo travelers, our Single Room offers a cozy space with one bed, ideal for rest and relaxation.
                                                         <br /><br />The room is equipped with essential amenities such as a work desk, flat-screen TV, and complimentary Wi-Fi, ensuring a smooth and comfortable stay.</p>
                                                     <div className="main-button">
-                                                        <button className='btn' onClick={handleBookNow}><i className="fa fa-calendar"></i> Room Details</button>
+                                                        <button className='btn' onClick={handleBookNow}><i className="fa fa-calendar"></i> Book Now</button>
                                                     </div>
                                                 </div>
                                             </div>

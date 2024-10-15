@@ -16,7 +16,11 @@ const Contact1 = () => {
   const [user, setUser] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') !== null);
+  const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
 
+  const handleToggle = () => {
+    setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+  };
   const MySwal = withReactContent(Swal)
   const navigate = useNavigate();
 
@@ -66,6 +70,20 @@ const Contact1 = () => {
                   <li><Link to="/SearchRoom1"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
                   <li><Link to='/login'><Avatar alt="Profile" /></Link></li>
                 </ul>
+                <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                  <div className="bar1"></div>
+                  <div className="bar2"></div>
+                  <div className="bar3"></div>
+                </div>
+                <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                  <ul className="navMenu">
+                    <li><Link to="/" className="active">Home</Link></li>
+                    <li><Link to="/SearchRoom1">Search Room</Link></li>
+                    <li><Link to="/Contact1">Contact Us</Link></li>
+                    <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                    <li><Link to='/login'><Avatar alt="Profile" /></Link></li>
+                  </ul>
+                </div>
               </nav>
             </div>
           </div>

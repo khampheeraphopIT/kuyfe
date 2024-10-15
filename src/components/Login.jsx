@@ -8,7 +8,11 @@ import withReactContent from 'sweetalert2-react-content'
 function Login() {
   const navigate = useNavigate()
   const MySwal = withReactContent(Swal)
+  const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
 
+  const handleToggle = () => {
+    setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+  };
   const [inputs, setInputs] = useState({});
 
   const handleChange = (event) => {
@@ -36,37 +40,37 @@ function Login() {
     };
 
     fetch("http://localhost:3333/login", requestOptions)
-    .then((response) => response.json())
-    .then((result) => {
-      console.log(result);
-      if (result.status === 'ok') {
-        MySwal.fire({
-          imageUrl: Logo,
-          imageWidth: 100,
-          imageHeight: 100,
-          title: 'Login success',
-          icon: 'success',
-          confirmButtonText: 'Home',
-        }).then((value) => {
-          localStorage.setItem('token', result.accessToken);
-          localStorage.setItem('role', result.role); // เก็บ role ใน localStorage
-          if (result.role === 'administration') {
-            navigate('/admin'); // ถ้าเป็น admin ให้ไปหน้าสำหรับแอดมิน
-          } else if (result.role === 'hotel staff') {
-            navigate('/staff'); // ถ้าเป็น staff ให้ไปหน้าสำหรับ staff
-          } else {
-            navigate('/profile'); // ถ้าเป็น member หรืออื่นๆ ให้ไปที่หน้าข้อมูลผู้ใช้
-          }
-        });
-      } else {
-        MySwal.fire({
-          html: <i>{result.message}</i>,
-          icon: 'error',
-        });
-      }
-    })
-    .catch((error) => console.error(error));
-  
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        if (result.status === 'ok') {
+          MySwal.fire({
+            imageUrl: Logo,
+            imageWidth: 100,
+            imageHeight: 100,
+            title: 'Login success',
+            icon: 'success',
+            confirmButtonText: 'Home',
+          }).then((value) => {
+            localStorage.setItem('token', result.accessToken);
+            localStorage.setItem('role', result.role); // เก็บ role ใน localStorage
+            if (result.role === 'administration') {
+              navigate('/admin'); // ถ้าเป็น admin ให้ไปหน้าสำหรับแอดมิน
+            } else if (result.role === 'hotel staff') {
+              navigate('/staff'); // ถ้าเป็น staff ให้ไปหน้าสำหรับ staff
+            } else {
+              navigate('/profile'); // ถ้าเป็น member หรืออื่นๆ ให้ไปที่หน้าข้อมูลผู้ใช้
+            }
+          });
+        } else {
+          MySwal.fire({
+            html: <i>{result.message}</i>,
+            icon: 'error',
+          });
+        }
+      })
+      .catch((error) => console.error(error));
+
 
     console.log(inputs);
   }
@@ -97,15 +101,29 @@ function Login() {
           <div className="row">
             <div className="col-12">
               <nav className="main-nav">
-                <a href="/" className="logo">
+                <Link to="/" className="logo">
                   <img src={Logo} alt="" />
-                </a>
+                </Link>
+
                 <ul className="nav">
                   <li><Link to="/" className="active">Home</Link></li>
                   <li><Link to="/SearchRoom1">Search Room</Link></li>
-                  <li><Link to="/Contact">Contact Us</Link></li>
-                  <li><Link to="/SearchRoom"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>                  
+                  <li><Link to="/Contact1">Contact Us</Link></li>
+                  <li><Link to="/SearchRoom"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
                 </ul>
+                <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                  <div className="bar1"></div>
+                  <div className="bar2"></div>
+                  <div className="bar3"></div>
+                </div>
+                <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                  <ul className="navMenu">
+                    <li><Link to="/" className="active">Home</Link></li>
+                    <li><Link to="/SearchRoom1">Search Room</Link></li>
+                    <li><Link to="/Contact1">Contact Us</Link></li>
+                    <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                  </ul>
+                </div>
               </nav>
             </div>
           </div>

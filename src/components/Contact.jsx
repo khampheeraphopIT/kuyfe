@@ -17,6 +17,12 @@ const Contact = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') !== null);
 
+  const [isActive, setIsActive] = useState(false); // จัดการสถานะของเมนู
+
+  const handleToggle = () => {
+    setIsActive(!isActive); // สลับสถานะเมื่อกดปุ่มเมนู
+  };
+
   const MySwal = withReactContent(Swal)
   const navigate = useNavigate();
 
@@ -91,11 +97,11 @@ const Contact = () => {
           <div className="row">
             <div className="col-12">
               <nav className="main-nav">
-                <a href="/" className="logo">
+                <Link to="/" className="logo">
                   <img src={Logo} alt="" />
-                </a>
+                </Link>
                 <ul className="nav">
-                  <li><Link to="/profile" className="active">Home</Link></li>
+                  <li><Link to="/Profile" className="active">Home</Link></li>
                   <li><Link to="/SearchRoom">Search Room</Link></li>
                   <li><Link to="/Contact">Contact Us</Link></li>
                   <li><Link to="/SearchRoom"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
@@ -113,11 +119,43 @@ const Contact = () => {
                     </li>
                   )}
                 </ul>
+                <div className={`HamMenu ${isActive ? 'change' : ''}`} onClick={handleToggle}>
+                  <div className="bar1"></div>
+                  <div className="bar2"></div>
+                  <div className="bar3"></div>
+                </div>
+                <div id="MyMenu" className={`menu ${isActive ? 'menu-active' : ''}`}>
+                  <ul className="navMenu">
+                    <li><Link to="/Profile" className="active">Home</Link></li>
+                    <li><Link to="/SearchRoom">Search Room</Link></li>
+                    <li><Link to="/Contact">Contact Us</Link></li>
+                    <li><Link to="/login"><i className="fa fa-calendar"></i><span>Book Now</span></Link></li>
+                    {isLoggedIn ? (
+                    <li>
+                      <Avatar
+                        src={user.image ? `data:image/jpeg;base64,${user.image}` : 'default-image-url'}
+                        alt={user.id}
+                        onClick={handleSidebarToggle}
+                      />
+                    </li>
+                  ) : (
+                    <li>
+                      <button onClick={handleSidebarToggle}>Login</button>
+                    </li>
+                  )}
+                  </ul>
+                </div>
               </nav>
             </div>
           </div>
         </div>
       </header>
+      <Sidebar
+        isOpen={isSidebarOpen}
+        onClose={handleSidebarToggle}
+        isLoggedIn={isLoggedIn}
+        handleLogout={handleLogout}
+      />
 
       <div className="page-heading header-text">
         <div className="container">

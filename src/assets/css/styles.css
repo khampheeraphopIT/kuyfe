@@ -15,15 +15,70 @@ font & reset css
 --------------------------------------------- 
 */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900");
+
 /* 
 ---------------------------------------------
 reset
 --------------------------------------------- 
 */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
-pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
-s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
-figure, header, nav, section, article, aside, footer, figcaption {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+div pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+figure,
+header,
+nav,
+section,
+article,
+aside,
+footer,
+figcaption {
   margin: 0;
   padding: 0;
   border: 0;
@@ -55,13 +110,20 @@ html[xmlns] .clearfix {
   height: 1%;
 }
 
-ul, li {
+ul,
+li {
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
-header, nav, section, article, aside, footer, hgroup {
+header,
+nav,
+section,
+article,
+aside,
+footer,
+hgroup {
   display: block;
 }
 
@@ -69,7 +131,8 @@ header, nav, section, article, aside, footer, hgroup {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   font-family: 'Poppins', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -80,7 +143,12 @@ a {
   text-decoration: none !important;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: #1e1e1e;
   margin-top: 0px;
   margin-bottom: 0px;
@@ -291,12 +359,12 @@ Header Style
 
 .background-header {
   background-color: #fff;
-  height: 80px!important;
-  position: fixed!important;
-  top: 0!important;
+  height: 80px !important;
+  position: fixed !important;
+  top: 0 !important;
   left: 0;
   right: 0;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.15)!important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15) !important;
   -webkit-transition: all .5s ease 0s;
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
@@ -312,7 +380,7 @@ Header Style
   -moz-transition: all .5s ease 0s;
   -o-transition: all .5s ease 0s;
   transition: all .5s ease 0s;
-  
+
 }
 
 .header-area .main-nav {
@@ -413,21 +481,103 @@ Header Style
   margin-top: 20px;
 }
 
-.visible{
-  display:inline !important;
+.visible {
+  display: inline !important;
 }
-@media only screen and (min-width: 430px) and (max-width: 700px) {
-  .header-area .main-nav .nav li a {
-    height: auto;
-    margin-left: 0rem;
-    padding-left: 2px;
-    padding-right: 2px;
-    width: 30px;
-    font-size: 7px;
+
+
+.menu {
+  display: none;
+  /* ซ่อนเมนูโดยเริ่มต้น */
+}
+
+@media only screen and (min-width: 200px) and (max-width: 800px) {
+  .HamMenu {
+    display: inline-block;
+    /* ซ่อน Hamburger Menu บนอุปกรณ์ที่มีหน้าจอใหญ่ */
+    flex-direction: column;
+    /* จัดเรียงเป็นแนวตั้ง */
+    cursor: pointer;
+    /* เปลี่ยนเคอร์เซอร์เป็น pointer */
+    margin-top: 2.5rem;
   }
-  .header-area .main-nav .logo {
-    width: 60px;
-    height: auto;
+
+  .bar1,
+  .bar2,
+  .bar3 {
+    width: 30px;
+    height: 4px;
+    /* ความสูงของบาร์ */
+    background-color: #333;
+    /* สีของบาร์ */
+    margin: 4px;
+    /* ระยะห่างระหว่างบาร์ */
+    transition: 0.4s;
+    /* เพิ่ม transition */
+  }
+
+  .HamMenu.change .bar1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+    /* เปลี่ยนรูปร่าง */
+  }
+
+  .HamMenu.change .bar2 {
+    opacity: 0;
+    /* ซ่อนบาร์กลาง */
+  }
+
+  .HamMenu.change .bar3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+    /* เปลี่ยนรูปร่าง */
+  }
+
+  .menu-active {
+    display: block;
+    /* แสดงเมนูเมื่อ active */
+    position: absolute;
+    /* ใช้ตำแหน่ง absolute */
+    top: 70px;
+    /* ระยะห่างจากด้านบน */
+    left: 0;
+    width: 100%;
+    background: white;
+    /* สีพื้นหลัง */
+    border-top: 1px solid #ddd;
+    /* เส้นขอบด้านบน */
+    z-index: 1000;
+    /* ให้อยู่เหนือองค์ประกอบอื่น */
+  }
+
+  .menu .navMenu {
+    flex-direction: column;
+    /* เปลี่ยนให้แนวตั้ง */
+    gap: 10px;
+    /* ระยะห่างระหว่างลิงก์ */
+  }
+
+  .menu-active {
+    display: block;
+  }
+
+  .header-area .main-nav .nav {
+    display: none;
+  }
+
+  .menu li {
+    margin: 1rem 0;
+    /*ตัวอักษรออกห่างจากMargin 1 rem หรือ ช่องว่างด้านบนของElement มีขนาด 1 rem*/
+    border-top: 1px solid #000000;
+    /*เพิ่มขอบด้านบน*/
+    padding-top: 1rem;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+
+  .menu li:hover {
+    text-decoration: underline;
+  }
+  .menu li a {
+    color: #000000;
   }
 }
 
@@ -445,10 +595,12 @@ Header Style
     border-radius: 0px 0px 25px 25px;
     width: 100%;
   }
+
   .background-header .main-nav .nav,
   .header-area .main-nav .nav {
     background-color: #fff;
   }
+
   .background-header .main-nav .nav li a,
   .header-area .main-nav .nav li a {
     line-height: 50px;
@@ -456,8 +608,9 @@ Header Style
     font-weight: 400;
     color: #1e1e1e;
     background-color: #fff;
-     border-radius: 0px 0px 25px 25px;
+    border-radius: 0px 0px 25px 25px;
   }
+
   .background-header .main-nav .nav li,
   .header-area .main-nav .nav li {
     border-top: 1px solid #ddd;
@@ -465,51 +618,63 @@ Header Style
     height: 50px;
     border-radius: 0px 0px 25px 25px;
   }
+
   .header-area .main-nav .nav {
     height: auto;
     flex-basis: 100%;
   }
+
   .header-area .main-nav .logo {
     position: absolute;
     left: 30px;
     top: 0px;
   }
+
   .background-header .main-nav .logo {
     top: 0px;
   }
+
   .background-header .main-nav .border-button {
     top: 0px !important;
   }
+
   .header-area .main-nav .border-button {
     position: absolute;
     top: 15px;
     right: 70px;
   }
+
   .header-area.header-sticky .nav li a:hover,
   .header-area.header-sticky .nav li a.active {
-    color: #ee626b!important;
+    color: #ee626b !important;
     opacity: 1;
   }
+
   .header-area.header-sticky .nav li.search-icon a {
     width: 100%;
   }
+
   .header-area .nav li:last-child a {
     background-color: transparent !important;
     font-weight: 300 !important;
     text-transform: capitalize !important;
   }
+
   .header-area {
     padding: 0px 15px;
     height: 80px;
     box-shadow: none;
     text-align: center;
   }
+
   .header-area .container {
     padding: 0px;
   }
+
   .header-area .logo {
     margin-left: 0px;
   }
+
   .header-area .main-nav .nav {
     float: none;
     width: 100%;
@@ -520,22 +685,26 @@ Header Style
     transition: all 0s ease 0s;
     margin-left: 0px;
   }
+
   .header-area .main-nav .nav li:first-child {
     border-top: 1px solid #eee;
   }
+
   .header-area.header-sticky .nav {
     margin-top: 80px !important;
   }
+
   .background-header.header-sticky .nav {
     margin-top: 80px !important;
   }
+
   .header-area .main-nav .nav li {
     width: 100%;
     background: #fff;
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
-  
+
 }
 
 /* 
@@ -548,7 +717,8 @@ Banner Style
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 700px; /* กำหนดความสูงของสไลด์ */
+  height: 700px;
+  /* กำหนดความสูงของสไลด์ */
 }
 
 .main-banner .item {
@@ -830,13 +1000,15 @@ Best Deal Style
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center; /* จัดกลางข้อความ */
+  text-align: center;
+  /* จัดกลางข้อความ */
   padding: 20px;
 }
 
 .best-deal .col-lg-12 {
   display: flex;
-  justify-content: center; /* จัดกลางภายใน row */
+  justify-content: center;
+  /* จัดกลางภายใน row */
 }
 
 .best-deal .tabs-content .nav-link {
@@ -900,7 +1072,7 @@ Best Deal Style
   border-radius: 10px;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.15);
   padding: 1.5rem;
-  
+
 }
 
 .best-deal .info-table h3 {
@@ -927,13 +1099,15 @@ best-deals
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center; /* จัดกลางข้อความ */
+  text-align: center;
+  /* จัดกลางข้อความ */
   padding: 20px;
 }
 
 .best-deals .col-lg-12 {
   display: flex;
-  justify-content: center; /* จัดกลางภายใน row */
+  justify-content: center;
+  /* จัดกลางภายใน row */
 }
 
 .best-deals .info-table {
@@ -1012,7 +1186,7 @@ Properties Style
 .propertie .item img {
   width: 45rem;
   height: 570px;
-  border: 1px solid #000000 ;
+  border: 1px solid #000000;
 }
 
 .propertie .item .image-details {
@@ -1223,7 +1397,7 @@ footer.footer-no-gap {
 footer {
   display: flex;
   justify-content: center;
-  margin-top: 5rem ;
+  margin-top: 5rem;
   width: 100%;
   height: 100px;
   background-color: #1e1e1e;
@@ -1255,17 +1429,21 @@ footer p a:hover {
   align-items: center;
   min-height: 100vh;
   background-color: #f6f6f6;
-  padding: 20px; /* เพิ่มพื้นที่รอบๆ */
+  padding: 20px;
+  /* เพิ่มพื้นที่รอบๆ */
 }
 
 /* การตั้งค่าสำหรับ .container-Login */
 .page-Login .container-Login {
   background-color: #ffffff;
-  padding: 40px; /* เพิ่ม padding รอบๆ ภายในกล่อง */
+  padding: 40px;
+  /* เพิ่ม padding รอบๆ ภายในกล่อง */
   border-radius: 10px;
   width: 100%;
-  max-width: 500px; /* กำหนดความกว้างสูงสุด */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเพื่อให้ดูลอยขึ้น */
+  max-width: 500px;
+  /* กำหนดความกว้างสูงสุด */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* เพิ่มเงาเพื่อให้ดูลอยขึ้น */
 }
 
 /* การตั้งค่าหลักสำหรับ .wrapper */
@@ -1296,7 +1474,8 @@ footer p a:hover {
 .wrapper .input-box label {
   display: block;
   color: #000000;
-  margin-bottom: 5px; /* เพิ่มระยะห่างระหว่าง label กับ input */
+  margin-bottom: 5px;
+  /* เพิ่มระยะห่างระหว่าง label กับ input */
 }
 
 .wrapper .input-box input {
@@ -1320,7 +1499,8 @@ footer p a:hover {
 /* การตั้งค่าสำหรับ .btn */
 .wrapper .btn {
   width: 100%;
-  max-width: 250px; /* กำหนดความกว้างสูงสุดให้ปุ่ม */
+  max-width: 250px;
+  /* กำหนดความกว้างสูงสุดให้ปุ่ม */
   cursor: pointer;
   font-size: 16px;
   color: #fff;
@@ -1329,11 +1509,12 @@ footer p a:hover {
   text-align: center;
   font-weight: 600;
   padding: 15px;
-  margin: 20px 0; /* เพิ่มระยะห่างด้านบนและด้านล่าง */
+  margin: 20px 0;
+  /* เพิ่มระยะห่างด้านบนและด้านล่าง */
 }
 
 .wrapper .btn:hover {
-  background-color:#06ff0e ;
+  background-color: #06ff0e;
 }
 
 /* การตั้งค่าสำหรับ .register-link */
@@ -1349,7 +1530,8 @@ footer p a:hover {
 
 .container-booking {
   max-width: 50%;
-  margin: 5rem ; /* ใช้ auto เพื่อจัดตำแหน่งให้อยู่กลาง */
+  margin: 5rem;
+  /* ใช้ auto เพื่อจัดตำแหน่งให้อยู่กลาง */
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -1381,11 +1563,13 @@ footer p a:hover {
 
 .container-booking .booking .booking-form {
   display: flex;
-  flex-direction: column; /* จัดให้รายการในฟอร์มเป็นคอลัมน์ */
+  flex-direction: column;
+  /* จัดให้รายการในฟอร์มเป็นคอลัมน์ */
 }
 
 .container-booking .booking .booking-form label {
-  margin-bottom: 0.5rem; /* ลดช่องว่างระหว่าง label และ input */
+  margin-bottom: 0.5rem;
+  /* ลดช่องว่างระหว่าง label และ input */
   font-size: 1rem;
   color: #555;
   padding: 0.5rem;
@@ -1400,7 +1584,8 @@ footer p a:hover {
   border-radius: 4px;
   font-size: 16px;
   margin-bottom: 1rem;
-  width: 100%; /* ให้ input ใช้ความกว้างเต็มที่ของคอนเทนเนอร์ */
+  width: 100%;
+  /* ให้ input ใช้ความกว้างเต็มที่ของคอนเทนเนอร์ */
 }
 
 .reservation-summary {
@@ -1448,10 +1633,12 @@ footer p a:hover {
 table {
   margin: 1rem;
   border-collapse: collapse;
-  width: 100%; /* ปรับความกว้างของตารางได้ตามต้องการ */
+  width: 100%;
+  /* ปรับความกว้างของตารางได้ตามต้องการ */
 }
 
-th, td {
+th,
+td {
   padding: 0.6rem;
 }
 
@@ -1665,52 +1852,52 @@ body {
 }
 
 .form-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f9;
 }
 
 .register-form {
-    background-color: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 400px;
-    text-align: center;
+  background-color: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+  text-align: center;
 }
 
 .register-form h2 {
-    margin-bottom: 20px;
-    color: black;
+  margin-bottom: 20px;
+  color: black;
 }
 
 .register-form label {
-    display: block;
-    margin-bottom: 10px;
-    text-align: left;
-    color:black;
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+  color: black;
 }
 
 .register-form .form-input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid black;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    font-size: 14px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid black;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 14px;
 }
 
 .register-form .form-submit {
-    width: 100%;
-    padding: 10px;
-    background-color: #06ff0e;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  background-color: #06ff0e;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -1719,13 +1906,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .register-form .form-submit:hover {
-    background-color: #45a049;
+  background-color: #45a049;
 }
 
 .register-form .error-message {
-    color: red;
-    font-size: 12px;
-    margin-bottom: 10px;
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
 }
 
 
@@ -1733,9 +1920,11 @@ input[type="number"]::-webkit-outer-spin-button {
   .header-area .main-nav .logo h1 {
     line-height: 100px;
   }
+
   .background-header .main-nav .logo h1 {
     line-height: 80px;
   }
+
   .header-area .main-nav .nav li a {
     margin: 1px;
   }
@@ -1746,99 +1935,123 @@ input[type="number"]::-webkit-outer-spin-button {
     height: 44px;
     line-height: 44px;
   }
+
   .best-deal .tabs-content ul.nav-tabs li {
     margin: 0px 5px;
   }
+
   .properties ul.properties-filter li a {
     font-size: 14px;
     padding: 10px 15px;
   }
+
   .properties ul.properties-filter li {
     margin: 5px;
   }
+
   .header-area .main-nav .nav li:last-child {
     display: none;
   }
 }
 
-@media only screen and  (min-width: 700px) and (max-width: 991px){
+@media only screen and (min-width: 700px) and (max-width: 991px) {
   .header-area .main-nav .nav li a {
-      margin-left: 2rem;
-      padding-left: 3px;
-      padding-right: 3px;
-      height: auto;
+    margin-left: 2rem;
+    padding-left: 3px;
+    padding-right: 3px;
+    height: auto;
   }
 
   .header-area .main-nav .nav li:last-child a {
     padding-right: 15px;
   }
+
   .main-banner .item h2 {
     width: 100%;
   }
+
   .featured .section-heading {
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 100px;
   }
+
   .featured .accordion {
     margin-left: 0px;
     margin-right: 0px;
   }
+
   .featured .info-table {
     margin-top: 45px;
   }
+
   .fun-facts .counter {
     margin-bottom: 45px;
   }
+
   .best-deal .section-heading {
     text-align: center;
   }
+
   .best-deal .tabs-content ul.nav-tabs {
     margin-top: 0px;
     justify-content: center;
   }
+
   .best-deal .info-table {
     margin-bottom: 45px;
   }
+
   .best-deal .tab-content img {
     padding: 0px;
   }
+
   .best-deal .tabs-content h4 {
     margin-top: 45px;
   }
+
   .properties .item h6 {
     text-align: center;
     margin-bottom: 15px;
   }
+
   .properties .item .main-button {
     text-align: center;
   }
+
   .properties .item ul li {
     margin-right: 10px;
     font-size: 13px;
   }
+
   .contact-content .phone {
     margin-right: 0px;
     margin-bottom: 20px;
   }
+
   .contact-content .email {
     margin-left: 0px;
     margin-bottom: 45px;
   }
+
   .contact-content #contact-form {
     margin-left: 0px;
   }
+
   .single-property .info-table {
     margin-left: 0px;
     margin-top: 45px;
   }
+
   .contact-page .section-heading {
     margin-right: 0px !important;
   }
+
   .contact-page #contact-form {
     margin-left: 0px;
     margin-top: 60px;
   }
+
   .best-deal .info-table ul li span {
     float: right !important;
     width: auto !important;
@@ -1850,6 +2063,7 @@ input[type="number"]::-webkit-outer-spin-button {
     float: none;
     width: 100%;
   }
+
   .contact-page .section-heading {
     margin-right: 100px;
   }
